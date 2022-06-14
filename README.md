@@ -2,9 +2,9 @@
 
 Custom university Wordpress template styled to emulate the University of Minnesota, complete with subjects, professors, events, and blog posts. The code often refers to Hogwarts, which was the original inspiration for the university template.
 
-Languages: PHP, Javascript, Sass, HTML
+**Languages**: PHP, Javascript, Sass, HTML
 
-Features: Live search, custom REST API endpoints, CRUD note-taking, advanced custom fields, custom post types.
+**Features**: Live search, custom REST API endpoints, CRUD note-taking, advanced custom fields, custom post types.
 
 I took on this project as part of a Udemy course I used to learn PHP, but quickly added additional features and functionality. I used Local by Flywheel to create my WordPress developer environment. 
 
@@ -15,23 +15,9 @@ The project is responsive between mobile and desktop devices, leverages template
 ![umngithubgif](https://user-images.githubusercontent.com/66852498/173600947-d296ce48-4ceb-4e4e-b4c6-a361422ed639.gif)
 
 **Custom Post Types**
+There are custom post types enabled for events, professors, subjects, campuses -- as well as notes and likes, enabling some of the cooler features.
 
 ```
-// Professor Post Type
-        register_post_type( 'professor', array(
-            'show_in_rest' => true,
-            'supports' => array('title', 'editor', 'thumbnail'), // 'custom-fields' would go here if not using the Advanced Custom Fields              plugin. 'thumbnail' enables featured images on Professor posts
-            'rewrite' => array('slug' => 'professors'),
-            'public' => true,
-            'menu_icon' => 'dashicons-welcome-learn-more',
-            'labels' => array(
-                'name' => 'Professors',
-                'add_new_item' => 'Add New Professor',
-                'edit_item' => 'Edit Professor',
-                'all_items' => 'All Professors',
-                'singular_name' => 'Professor'
-            )
-        ));
 
         // Note Post Type
         register_post_type( 'note', array(
@@ -70,11 +56,12 @@ The project is responsive between mobile and desktop devices, leverages template
 ```
 
 **CRUD Note-Taking**
+Notes can be created, edited, deleted. Feature is programmed so only logged-in users can create notes, and they can only post at most 5 notes.
 
 ![notesgif](https://user-images.githubusercontent.com/66852498/173607292-d139099e-824a-4ec4-840c-24fc71481832.gif)
 
 **Custom REST API Endpoints**
-
+Edited the WordPress REST API to return the author name so we can display it in search results, as well as a user note counter to verify they have permissions to create a new one.
 ```
     function hogwarts_custom_rest() {
         register_rest_field('post', 'authorName', array(
